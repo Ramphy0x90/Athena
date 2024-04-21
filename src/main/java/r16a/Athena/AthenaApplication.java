@@ -1,13 +1,13 @@
-package com.r16a.Athena;
+package r16a.Athena;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AuthApplication {
+public class AthenaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AuthApplication.class, args);
+		SpringApplication.run(AthenaApplication.class, args);
 	}
 
 }
