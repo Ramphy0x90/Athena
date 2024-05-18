@@ -1,6 +1,7 @@
 HELP.md
 .mvn
 build/
+target/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
