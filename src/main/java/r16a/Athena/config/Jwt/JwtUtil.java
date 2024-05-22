@@ -18,9 +18,9 @@ public class JwtUtil {
         this.jwtProperties = jwtProperties;
     }
 
-    public String generateToken(User user) {
+    public String generateToken(User user, long duration) {
         Date now = new Date();
-        Date expiration = new Date(now.getTime() + 3_600_000);
+        Date expiration = new Date(now.getTime() + duration);
 
         return JWT.create()
                 .withIssuer(user.getEmail())
@@ -29,6 +29,10 @@ public class JwtUtil {
                 .withClaim("email", user.getEmail())
                 .withClaim("displayName", user.getName() + " " + user.getSurname())
                 .sign(Algorithm.HMAC256(jwtProperties.getSecret()));
+    }
+
+    public String generateToken(User user) {
+        return generateToken(user, jwtProperties.getExpiration());
     }
 
     public String validateToken(String token) throws JWTVerificationException {
