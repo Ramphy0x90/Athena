@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_base-layout.html}">
+<head>
+    <title>Athena Sign up</title>
+</head>
+
+<body>
+<div layout:fragment="form">
+    <form method="POST" action="api/v1/auth/register" class="flex">
+        <div class="form-field user-field">
+            <label for="name-field">Name *</label>
+            <input id="name-field" type="text" name="name" required>
+        </div>
+
+        <div class="form-field user-field">
+            <label for="surname-field">Surname *</label>
+            <input id="surname-field" type="text" name="surname" required>
+        </div>
+
+        <div class="form-field user-field">
+            <label for="email-field">Email *</label>
+            <input id="email-field" type="text" name="email" required>
+        </div>
+
+        <div class="form-field user-field">
+            <label for="username-field">Username</label>
+            <input id="username-field" type="text" name="userName">
+        </div>
+
+        <div class="form-field password-field">
+            <label for="password-field">Password *</label>
+            <input id="password-field" type="password" name="password" required>
+        </div>
+
+        <div class="actions-container flex">
+            <button class="submit-button signup-button">Sign up</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

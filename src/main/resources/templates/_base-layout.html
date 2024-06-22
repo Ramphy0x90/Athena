@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Athena auth</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+<div class="content-container">
+    <div class="auth-form flex">
+        <div class="form-header">
+            <div class="form-title"></div>
+            <div class="form-image"></div>
+        </div>
+
+        <div class="error-message">
+        </div>
+
+        <div layout:fragment="errors">
+        </div>
+
+        <div class="form-body">
+            <div layout:fragment="form">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", () => {
+        const form = document.querySelector("form");
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+            const jsonData = {};
+
+            formData.forEach((value, key) => {
+                jsonData[key] = value;
+            });
+
+            const xhr = new XMLHttpRequest();
+            xhr.open(form.method, form.action, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onload = () => {
+                const errorMessageContainer = document.querySelector(".error-message");
+
+                if (xhr.status >= 400) {
+                    errorMessageContainer.textContent = xhr.responseText;
+                    errorMessageContainer.style.display = "block";
+                } else {
+                    errorMessageContainer.textContent = "";
+                    errorMessageContainer.style.display = "none";
+                }
+            };
+
+            xhr.onerror = () => {
+                const errorMessageContainer = document.querySelector(".error-message");
+                errorMessageContainer.textContent = "An error occurred during the request.";
+                errorMessageContainer.classList.add("visible");
+            };
+
+            xhr.send(JSON.stringify(jsonData));
+        });
+    });
+</script>
+</html>
