@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: athena-app
+  namespace: athena
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: athena-app
+  template:
+    metadata:
+      labels:
+        app: athena-app
+    spec:
+      containers:
+        - name: athena-app
+          image: your_dockerhub_username/athena_app:latest
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - secretRef:
+                name: athena-app-secret
