@@ -50,7 +50,7 @@ public class EmailUtil {
                 .html(body)
                 .build();
 
-        if(!appConfig.isProduction()) {
+        if(appConfig.isProduction()) {
             try {
                 resend.emails().send(sendEmailRequest);
                 log.info("EmailUtil: email sent to {}", to);
