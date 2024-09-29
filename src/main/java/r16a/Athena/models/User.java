@@ -13,6 +13,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "_user")
 public class User {
+    public enum UserStatus {
+        ACTIVE,
+        DISABLED,
+        LOCKED
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -22,6 +28,10 @@ public class User {
 
     @Column(unique = true)
     private String email;
+
+    @Column(unique = true)
     private String userName;
+
     private String password;
+    private UserStatus status = UserStatus.DISABLED;
 }
