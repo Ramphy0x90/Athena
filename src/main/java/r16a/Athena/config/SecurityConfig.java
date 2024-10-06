@@ -1,5 +1,7 @@
 package r16a.Athena.config;
 
+import lombok.AllArgsConstructor;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -15,6 +17,8 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import r16a.Athena.config.Jwt.JwtFilter;
 import r16a.Athena.config.Jwt.JwtUtil;
+import r16a.Athena.filters.IpRequestFilter;
+import r16a.Athena.services.IpRequestTrackingService;
 
 import java.security.SecureRandom;
 import java.util.Base64;
@@ -22,12 +26,10 @@ import java.util.List;
 import java.util.function.Supplier;
 
 @Configuration
+@AllArgsConstructor
 public class SecurityConfig {
     private final JwtUtil jwtUtil;
-
-    public SecurityConfig(JwtUtil jwtUtil) {
-        this.jwtUtil = jwtUtil;
-    }
+    private final IpRequestTrackingService ipRequestTrackingService;
 
     @Bean
     PasswordEncoder passwordEncoder() {
@@ -70,6 +72,13 @@ public class SecurityConfig {
         return http.build();
     }
 
+    @Bean
+    public FilterRegistrationBean<IpRequestFilter> ipRequestFilterRegistration() {
+        FilterRegistrationBean<IpRequestFilter> registrationBean = new FilterRegistrationBean<>();
+        registrationBean.setFilter(new IpRequestFilter(ipRequestTrackingService));
+        registrationBean.addUrlPatterns("/*");
+        return registrationBean;
+    }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
