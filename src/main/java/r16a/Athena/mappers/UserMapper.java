@@ -1,4 +1,4 @@
-package r16a.Athena.Mappers;
+package r16a.Athena.mappers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
