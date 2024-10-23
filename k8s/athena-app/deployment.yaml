@@ -13,11 +13,69 @@ spec:
       labels:
         app: athena-app
     spec:
+      imagePullSecrets:
+        - name: regcred
       containers:
         - name: athena-app
-          image: your_dockerhub_username/athena_app:latest
+          image: registry.r16a.ch:5000/athena/athena-app:latest
           ports:
             - containerPort: 8080
-          envFrom:
-            - secretRef:
-                name: athena-app-secret
+          env:
+            # ConfigMap-based variables for non-sensitive data
+            - name: APP_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: athena-app-config
+                  key: APP_BASE_URL
+            - name: APP_IS_PRODUCTION
+              valueFrom:
+                configMapKeyRef:
+                  name: athena-app-config
+                  key: APP_IS_PRODUCTION
+            - name: SERVER_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: athena-app-config
+                  key: SERVER_PORT
+            - name: DATABASE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: athena-app-config
+                  key: DATABASE_HOST
+            - name: DATABASE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: athena-app-config
+                  key: DATABASE_PORT
+
+            # Secret-based variables for sensitive data
+            - name: DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: athena-app-secret
+                  key: DATABASE_USER
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: athena-app-secret
+                  key: DATABASE_PASSWORD
+            - name: DATABASE_ADMIN_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: athena-app-secret
+                  key: DATABASE_ADMIN_EMAIL
+            - name: DATABASE_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: athena-app-secret
+                  key: DATABASE_ADMIN_PASSWORD
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: athena-app-secret
+                  key: JWT_SECRET
+            - name: EMAIL_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: athena-app-secret
+                  key: EMAIL_API_KEY

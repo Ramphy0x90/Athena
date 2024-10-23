@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: athena-app-config
+  namespace: athena
+data:
+  APP_BASE_URL: "http://localhost"
+  APP_IS_PRODUCTION: "true"
+  SERVER_PORT: "8080"
+  DATABASE_HOST: "athena_db"
+  DATABASE_PORT: "5432"
+  DATABASE_ADMIN_EMAIL: "ramphy_an@outlook.com"
+  DATABASE_ADMIN_PASSWORD: "password"
