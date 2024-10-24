@@ -5,6 +5,9 @@ target/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+### K8s ###
+/k8s/**/secret.yaml
+
 ### STS ###
 .apt_generated
 .classpath
