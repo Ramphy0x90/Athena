@@ -82,12 +82,25 @@ html, body {
     color: var(--color-white-dark);
 }
 
+.form-body div {
+    gap: var(--space-3);
+}
+
 .form-body form {
     gap: var(--space-3);
 }
 
 .form-body .actions-container {
     gap: var(--space-1);
+}
+
+.form-body .auth-form-banner {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--color-white);
+    border-bottom: 2px solid var(--color-blue);
+    padding: var(--space-2);
 }
 
 .actions-container .submit-button {
@@ -98,6 +111,10 @@ html, body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.actions-container .submit-button:hover {
+    background: var(--color-green-light);
 }
 
 .actions-container .forgot-password {
