@@ -1,21 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Athena AUTH</title>
-
-    <link rel="stylesheet" href="/css/style.css">
-</head>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{error/_base-layout.html}">
 
 <body>
-<div class="content-container">
-    <div class="human-error-message-container">
-        Server error occurred :(
-        <br><br>
-        Please try again later.
-    </div>
+<div layout:fragment="errorMessage">
+    Server error occurred :(
+    <br><br>
+    Please try again later.
+</div>
+
+<div layout:fragment="errorCode">
+    500
 </div>
 </body>
 </html>

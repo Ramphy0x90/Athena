@@ -77,9 +77,15 @@ html, body {
 }
 
 .human-error-message-container {
-    font-size: 32px;
+    font-size: 28px;
     text-align: center;
     color: var(--color-white-dark);
+}
+
+.human-error-message-container .error-code {
+    font-size: 32px;
+    color: var(--color-yellow);
+    font-weight: bold;
 }
 
 .form-body div {
