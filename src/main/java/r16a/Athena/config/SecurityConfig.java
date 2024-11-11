@@ -53,7 +53,8 @@ public class SecurityConfig {
                 .sessionManagement(customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         // APIs
-                        .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers("/*/api/v1/auth/**").permitAll()
+                        .requestMatchers("/api/v1/client/**").permitAll()
                         .requestMatchers("/api/v1/**").authenticated()
 
                         // Assets & templates

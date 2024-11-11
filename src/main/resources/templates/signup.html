@@ -9,6 +9,7 @@
 <body>
 <div layout:fragment="form">
     <div class="auth-form-banner">
+        <img th:if="${serviceConsumerIcon != null && serviceConsumerIcon.length != 0}" th:src="'data:image/png;base64,' + ${serviceConsumerIcon}" alt="Client icon"/>
         <span th:text="${serviceConsumer}"></span>
     </div>
 

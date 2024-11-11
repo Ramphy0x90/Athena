@@ -53,7 +53,7 @@
                 const errorMessageContainer = document.querySelector(".error-message");
 
                 if (xhr.status >= 400) {
-                    errorMessageContainer.textContent = xhr.responseText;
+                    errorMessageContainer.textContent = xhr.responseText ? xhr.responseText : "Unknown error :(";
                     errorMessageContainer.style.display = "block";
                 } else {
                     errorMessageContainer.textContent = "";
