@@ -58,7 +58,7 @@ public class EmailUtil {
                 log.error("EmailUtil: error sending email to {}", to);
             }
         } else {
-            log.info("EmailUtil: email demo {}", sendEmailRequest);
+            log.info("EmailUtil: email demo {}", body);
         }
     }
 }
