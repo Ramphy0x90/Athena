@@ -14,6 +14,9 @@
     </div>
 
     <form method="POST" action="api/v1/auth/authenticate" class="flex">
+        <!-- Page id to recognise and show the correct message after submitting form -->
+        <input type="text" name="page-id" value="LOGIN" style="display: none" />
+
         <div class="form-field user-field">
             <label for="user-field">Username / email</label>
             <input id="user-field" type="text" name="usernameEmail">

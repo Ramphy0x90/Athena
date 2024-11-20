@@ -12,13 +12,7 @@
 <body>
 <div class="content-container">
     <div class="auth-form flex">
-        <div class="form-header">
-            <div class="form-title"></div>
-            <div class="form-image"></div>
-        </div>
-
-        <div class="error-message">
-        </div>
+        <div class="error-message"></div>
 
         <div layout:fragment="errors">
         </div>
@@ -28,6 +22,8 @@
             </div>
         </div>
     </div>
+
+    <div class="post-submit-message"></div>
 </div>
 </body>
 
@@ -56,8 +52,32 @@
                     errorMessageContainer.textContent = xhr.responseText ? xhr.responseText : "Unknown error :(";
                     errorMessageContainer.style.display = "block";
                 } else {
+                    let postSubmitMessageText = "";
+
                     errorMessageContainer.textContent = "";
                     errorMessageContainer.style.display = "none";
+
+                    const pageId = jsonData["page-id"];
+                    switch (pageId) {
+                        case "LOGIN":
+                            postSubmitMessageText = "Logged in successfully, redirecting...";
+                            break;
+                        case "SIGNUP":
+                            postSubmitMessageText = "User created successfully, redirecting..."
+                            break;
+                        case "PASSWORD_RECOVERY_LINK":
+                            postSubmitMessageText = "Password recovery link sent.<br>Check your email"
+                            break;
+                        case "PASSWORD_RECOVERY_RESET":
+                            postSubmitMessageText = "Password has been reset"
+                            break;
+                    }
+
+                    document.querySelector(".auth-form").style.display = "none";
+
+                    const postSubmitMessage = document.querySelector(".post-submit-message");
+                    postSubmitMessage.style.display = "block";
+                    postSubmitMessage.innerHTML = postSubmitMessageText;
                 }
             };
 
