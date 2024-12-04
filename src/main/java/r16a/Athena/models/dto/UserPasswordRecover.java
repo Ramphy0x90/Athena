@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class UserPasswordRecover {
-    private String userName;
+    private String usernameEmail;
     private String password;
     private String passwordCheck;
 }

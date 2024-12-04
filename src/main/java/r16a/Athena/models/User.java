@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -31,7 +34,18 @@ public class User {
 
     @Column(unique = true)
     private String userName;
-
     private String password;
+    private boolean internal = false;
+
+    @Builder.Default
+    @Enumerated(EnumType.ORDINAL)
     private UserStatus status = UserStatus.DISABLED;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_client",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "client_id")
+    )
+    private Set<Client> clients = new HashSet<>();
 }

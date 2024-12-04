@@ -32,7 +32,7 @@ public class EmailUtil {
     @PostConstruct
     public void init() {
         resend = new Resend(emailApiKey);
-        log.info("EmailUtil: email client created");
+        log.info("Email client created");
     }
 
     /**
@@ -53,12 +53,12 @@ public class EmailUtil {
         if(appConfig.isProduction()) {
             try {
                 resend.emails().send(sendEmailRequest);
-                log.info("EmailUtil: email sent to {}", to);
+                log.info("Email sent to {}", to);
             } catch (ResendException e) {
-                log.error("EmailUtil: error sending email to {}", to);
+                log.error("Sending email to {}", to);
             }
         } else {
-            log.info("EmailUtil: email demo {}", body);
+            log.info("Email demo {}", body);
         }
     }
 }
