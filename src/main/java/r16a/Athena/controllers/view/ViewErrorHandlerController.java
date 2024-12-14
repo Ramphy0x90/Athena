@@ -1,4 +1,4 @@
-package r16a.Athena.controllers;
+package r16a.Athena.controllers.view;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,6 +23,8 @@ public class ViewErrorHandlerController implements ErrorController {
                 return "error/error-429";
             } else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
                 return "error/error-500";
+            } else if (statusCode == HttpStatus.SERVICE_UNAVAILABLE.value()) {
+                return "error/error-client-not-registered";
             }
         }
 
