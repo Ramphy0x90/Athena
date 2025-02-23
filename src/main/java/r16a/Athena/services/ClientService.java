@@ -13,6 +13,8 @@ import r16a.Athena.models.dto.ClientRestricted;
 import r16a.Athena.repositories.ClientRepository;
 
 import java.util.Base64;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Service fo client operations. Register and validate clients.
@@ -30,6 +32,10 @@ public class ClientService {
     public ClientRestricted getRestrictedById(Integer clientId) {
         Client client = clientRepository.findById(clientId).orElseThrow(() -> new ClientNotFoundException(clientId));
         return clientMapper.clientToRestricted(client);
+    }
+
+    public List<ClientRestricted> getAllRestricted() {
+        return clientRepository.findAll().stream().map(clientMapper::clientToRestricted).collect(Collectors.toList());
     }
 
     public ClientRestricted register(ClientRegister newClient) {
