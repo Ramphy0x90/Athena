@@ -13,11 +13,13 @@ spec:
       labels:
         app: athena-app
     spec:
+      nodeSelector:
+        internal: "true"
       imagePullSecrets:
         - name: regcred
       containers:
         - name: athena-app
-          image: registry.r16a.ch:5000/athena/athena-app:latest
+          image: registry.r16a.cloud/athena/athena-app:latest
           ports:
             - containerPort: 8080
           env:
