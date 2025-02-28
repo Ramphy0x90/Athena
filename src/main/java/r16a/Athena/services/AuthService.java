@@ -198,9 +198,6 @@ public class AuthService {
                 () -> new EntityNotFoundException(User.class.getSimpleName(), "email", userPasswordRecoverLink.getUsernameEmail())
         );
 
-        user.setStatus(User.UserStatus.LOCKED);
-        userRepository.save(user);
-
         long tokenDuration = TimeUnit.MINUTES.toMillis(EMAIL_LINK_EXPIRATION_IN_MINUTES);
         String tempToken = jwtUtil.generateToken(user, tokenDuration);
         String resetPasswordLink = appConfig.getAppBaseUrl() + ":" + appConfig.getServerPort() + "/" + clientId + "/password-recovery/" + tempToken;
