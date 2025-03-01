@@ -6,5 +6,6 @@ import lombok.Data;
 public class ClientRestricted {
     private Integer id;
     private String name;
+    private String description;
     private String icon;
 }
