@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import r16a.Athena.config.AppConfig;
 
 import java.time.LocalDateTime;
 import java.util.concurrent.ConcurrentHashMap;
@@ -18,6 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @AllArgsConstructor
 public class IpRequestTrackingService {
     private final ConcurrentHashMap<String, IpInfo> ipInfoByRoute = new ConcurrentHashMap<>();
+    private final AppConfig appConfig;
 
     private static final long BLOCK_TIME_SECONDS = 60;
     private static final int MAX_ROUTE_REQUESTS = 10;
@@ -79,7 +81,7 @@ public class IpRequestTrackingService {
         routeInfo.incrementRequestCount();
 
         // Block if the request limit for this route is exceeded
-        if (routeInfo.getRequestCount() > MAX_ROUTE_REQUESTS) {
+        if (appConfig.isProduction() && routeInfo.getRequestCount() > MAX_ROUTE_REQUESTS) {
             routeInfo.blockRoute();
         }
 
