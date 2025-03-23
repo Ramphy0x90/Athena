@@ -24,6 +24,12 @@ public class ClientController {
         return new ResponseEntity<>(clientService.getAllRestricted(), HttpStatus.OK);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<ClientRestricted> updateClient(@PathVariable Integer id, @RequestBody ClientRestricted client) {
+        log.info("Update client");
+        return new ResponseEntity<>(clientService.update(id, client), HttpStatus.OK);
+    }
+
     @PostMapping("/register")
     public ResponseEntity<ClientRestricted> registerClient(@RequestBody ClientRegister newClient) {
         log.info("Register client {}", newClient.getName());

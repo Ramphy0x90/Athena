@@ -21,8 +21,9 @@ public class Client {
 
     @Column(unique = true)
     private String name;
-
     private String description;
+    private String baseUrl;
+    private String postAuthUrl;
 
     @Lob
     private byte[] icon;

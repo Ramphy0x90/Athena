@@ -8,4 +8,6 @@ public class ClientRestricted {
     private String name;
     private String description;
     private String icon;
+    private String baseUrl;
+    private String postAuthUrl;
 }

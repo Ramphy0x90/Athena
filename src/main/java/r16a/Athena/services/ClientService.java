@@ -53,4 +53,17 @@ public class ClientService {
 
         return clientMapper.clientToRestricted(clientRepository.save(client));
     }
+
+    public ClientRestricted update(Integer clientId, ClientRestricted restricted) {
+        Client client = clientRepository.findById(clientId).orElseThrow(() -> new ClientNotFoundException(clientId));
+
+        client.setName(restricted.getName());
+        client.setDescription(restricted.getDescription());
+        client.setBaseUrl(restricted.getBaseUrl());
+        client.setPostAuthUrl(restricted.getPostAuthUrl());
+        client.setIcon(Base64.getDecoder().decode(client.getIcon()));
+        clientRepository.save(client);
+
+        return clientMapper.clientToRestricted(client);
+    }
 }
